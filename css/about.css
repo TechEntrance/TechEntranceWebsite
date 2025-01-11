@@ -1,0 +1,977 @@
+ 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+ /* Base Styles */
+    .menu-container {
+      position: relative;
+      width: 150px;
+      height: 70px;
+    }
+
+    .menu-name {
+      display: none;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-button {
+      display: block;
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      min-width: 120px;
+      text-align: center;
+      color: black;
+      background-color: white;
+      border-color: white;
+      font-weight: bold;
+    }
+
+    .menu-items {
+      display: none;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: center;
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      background-color: #f8f9fa;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* Styles when hovering over the menu container */
+    .menu-container:hover .menu-name {
+      display: none;
+    }
+
+    .menu-container:hover .menu-items {
+      display: flex;
+    }
+
+    .menu-item {
+      padding: 0.5rem;
+      text-decoration: none;
+      color: black;
+      text-decoration: none;
+    }
+
+    .menu-item:hover {
+      color: #0d048c;
+      text-decoration: none;
+    }
+
+    .menu-item:active {
+      color: #0d048c;
+      text-decoration: none;
+    }
+
+    /* Apply Internship Button */
+    #a1 {
+      position: relative;
+      border-radius: 50px;
+      border: 2px solid black;
+      color: white;
+      background-color: black;
+      padding: 0.5rem 1rem;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    #a1::before {
+      content: '';
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: white;
+      border-radius: 50px;
+      z-index: -1;
+      transition: all 0.6s ease-in-out;
+    }
+
+    #a1:hover::before {
+      bottom: 0;
+      height: 100%;
+    }
+
+    #a1:hover {
+      color: black;
+      border-color: white;
+    }
+
+      .menu-name {
+    display: block;
+    font-weight: bold;
+    color: white;
+    background-color: #0d6efd; /* Bootstrap primary color */
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 2px solid white;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .menu-name:hover {
+    background-color: white;
+    color: #0d6efd;
+  }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .menu-name {
+        display: none;
+      }
+
+      .menu-container {
+        width: 100%;
+        height: auto;
+      }
+
+      .menu-button,
+      .menu-items {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      /* Hide menu items by default on small screens */
+      .menu-items {
+        flex-direction: column;
+        gap: 0.5rem;
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Show menu items when toggle is active on small screens */
+      .menu-items.show {
+        display: flex;
+      }
+
+      #a1 {
+        padding: 0.4rem 0.8rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+  .menu-button {
+    display: none;
+  }
+
+  .menu-name {
+    display: block;
+    font-weight: bold;
+    color: black;
+    background-color: #f8f9fa; /* Bootstrap primary color */
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+    border: 2px solid white;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .menu-name:hover {
+    background-color: white;
+    color: #0d6efd;
+  }
+}
+
+
+
+
+/* ABOUT SECTION */
+/* About section */
+.about-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  flex-wrap: wrap; /* Ensure content wraps on small screens */
+}
+
+.left-side {
+  width: 55%;
+}
+
+.who-we-are h2 {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #0D048C;
+  padding: 8px 25px;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.right-side {
+  width: 40%; /* Adjusted width */
+}
+
+.company-image {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio by default */
+  border-radius: 15px;
+  object-fit: cover; /* Ensure image fits nicely */
+}
+
+/* Small screens (up to 768px) */
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column; /* Stack items vertically */
+    text-align: center;
+  }
+
+  .left-side, .right-side {
+    width: 100%; /* Full width for small screens */
+  }
+
+  .company-image {
+    max-height: 300px; /* Adjust max height for smaller screens */
+    width: 100%; /* Ensure the image takes full width */
+  }
+
+  .who-we-are h2 {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+}
+
+/* Medium screens (769px to 1199px) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .left-side {
+    width: 60%; /* Slightly larger width for medium screens */
+  }
+
+  .right-side {
+    width: 35%; /* Adjust right side width */
+  }
+
+  .company-image {
+    max-height: 400px; /* Adjust max height for medium screens */
+  }
+
+  .who-we-are h2 {
+    font-size: 1.1rem; /* Slightly larger font size */
+  }
+}
+
+/* Large screens (1200px and above) */
+@media (min-width: 1200px) {
+  .company-image {
+    height: 500px; /* Set a fixed height for large screens */
+  }
+
+  .left-side {
+    width: 55%; /* Default width for large screens */
+  }
+
+  .right-side {
+    width: 40%; /* Default width for large screens */
+  }
+
+  .who-we-are h2 {
+    font-size: 1.2rem; /* Default font size for larger screens */
+  }
+}
+
+
+
+
+
+/*WHY CHOOSE US*/
+/* Base styles for Why Choose Us section */
+.why-choose-us {
+  padding-top: 40px;
+}
+
+.why-choose-us .content {
+  position: relative;
+}
+
+.why-choose-us .line {
+  position: absolute;
+  left: 0;
+  top: 130px;
+  bottom: 70px;
+  width: 3px;
+  background-color: #0D048C;
+}
+
+.why-choose-us h3 {
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: black;
+}
+
+.why-choose-us p {
+  margin-bottom: 20px;
+  color: #555;
+  position: relative;
+  padding-left: 40px; /* Adjusted for bullet alignment */
+  font-size: 1.3rem;
+  text-align: justify;
+  font-weight: 400;
+}
+
+.why-choose-us p::before {
+  content: "";
+  position: absolute;
+  left: -5px; /* Aligns with the vertical line */
+  top: 10px;
+  width: 12px;
+  height: 12px;
+  background-color: #0D048C;
+  border-radius: 2px;
+}
+
+.why-choose-us .image img {
+  width: 90%;
+  height: auto; /* Default for responsiveness */
+  object-fit: cover;
+  border-radius: 40px;
+}
+
+/* Large screens (992px and up) */
+@media (min-width: 992px) {
+  .why-choose-us .image img {
+    height: 450px; /* Larger height for large screens */
+  }
+
+  .why-choose-us h3 {
+    font-size: 3.5rem; /* Larger font size for headings on large screens */
+  }
+
+  .why-choose-us p {
+    font-size: 1.4rem; /* Slightly larger font size for paragraphs */
+  }
+}
+
+/* Medium screens (768px to 991px) */
+@media (max-width: 991.98px) {
+   .why-choose-us .line {
+  position: absolute;
+  left: 0px;
+  top: 120px;
+  bottom: 90px;
+  width: 3px;
+  background-color: #0D048C;
+}
+  .why-choose-us .image img {
+    height: 300px; /* Smaller height for medium screens */
+  }
+
+  .why-choose-us h3 {
+    font-size: 2.8rem; /* Smaller font size for headings */
+  }
+
+  .why-choose-us p {
+    font-size: 1.2rem; /* Smaller font size for paragraphs */
+  }
+}
+
+/* Small screens (up to 767px) */
+@media (max-width: 768px) {
+  .why-choose-us .line {
+  position: absolute;
+  left: 10px;
+  top: 120px;
+  bottom: 90px;
+  width: 3px;
+  background-color: #0D048C;
+}
+  .why-choose-us .image img {
+    height: 250px; /* Smaller height for small screens */
+    margin-bottom: 20px; /* Add space between image and text */
+  }
+
+  .why-choose-us h3 {
+    font-size: 2.4rem; /* Smaller font size for headings */
+  }
+
+  .why-choose-us p {
+    font-size: 1.1rem; /* Smaller font size for paragraphs */
+    padding-left: 30px; /* Adjust padding for mobile */
+  }
+}
+
+
+
+/*COUNTER SECTION*/
+    #c1 {
+    background-size: cover; /* Ensures the background covers the entire button */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.section-header {
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Paragraph styling */
+.section-paragraph {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.counter-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+    padding: 1.5rem; /* Reduced padding */
+    border-radius: 30px;
+    background-color: #ffffff;
+    margin-top: 2rem; /* Reduced top margin */
+    max-width: 70%; /* Ensuring it doesn't take up the full width */
+    margin-left: auto;
+    margin-right: auto; /* Centers the container */
+}
+
+/* Counter styling */
+.counter {
+    text-align: center;
+    margin: 1rem;
+    flex: 1 1 calc(25% - 2rem); /* Allow counters to take up smaller space */
+    min-width: 180px; /* Prevent counters from becoming too small */
+}
+
+.counter .number {
+    font-size: 2.5rem; /* Reduced font size */
+    font-weight: bold;
+    color: #007BFF;
+    animation: countAnimation 2s ease-in-out forwards;
+}
+
+.counter .title {
+    font-size: 1rem; /* Slightly reduced title font size */
+    color: #555;
+}
+
+/* Keyframe animation for counter */
+@keyframes countAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Large screens (min-width: 1200px) */
+@media (min-width: 1200px) {
+    .section-header {
+        font-size: 4rem; /* Larger font for large screens */
+    }
+
+    .section-paragraph {
+        font-size: 1.2rem; /* Adjust paragraph font size for larger screens */
+    }
+
+    .counter-container {
+        max-width: 70%; /* Ensure container doesn't take full width */
+    }
+
+    .counter .number {
+        font-size: 3rem; /* Increase font size for larger screens */
+    }
+
+    .counter .title {
+        font-size: 1.2rem; /* Increase title font size for larger screens */
+    }
+}
+
+/* Medium screens (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .section-header {
+        font-size: 3rem; /* Adjust header font size for medium screens */
+    }
+
+    .counter-container {
+        max-width: 80%; /* Ensure container fits within medium screens */
+    }
+
+    .counter .number {
+        font-size: 2.2rem; /* Adjust font size for medium screens */
+    }
+
+    .counter .title {
+        font-size: 1rem; /* Adjust title font size for medium screens */
+    }
+}
+
+/* Small screens (up to 767px) */
+@media (max-width: 767px) {
+    .section-header {
+        font-size: 2.5rem; /* Smaller font size for small screens */
+    }
+
+    .section-paragraph {
+        font-size: 0.9rem; /* Smaller font for small screens */
+        margin-bottom: 1.5rem; /* Reduced margin for small screens */
+    }
+
+    .counter-container {
+        flex-direction: column;
+        max-width: 100%; /* Full width on small screens */
+    }
+
+    .counter {
+        margin: 0.5rem;
+        flex: 1 1 100%; /* Each counter takes full width */
+    }
+
+    .counter .number {
+        font-size: 2rem; /* Smaller font size on mobile */
+    }
+
+    .counter .title {
+        font-size: 1rem; /* Smaller title font size on mobile */
+    }
+}
+
+
+
+
+
+
+/* FAQ's       */
+    .faq-heading {
+    font-weight: bold;
+    font-size: 3.2rem;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.faq-container {
+    margin-bottom: 50px;
+}
+
+.accordion-button {
+    color: #000;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding-left: 40px; /* Adds space for the plus sign */
+    position: relative;
+    background-color: transparent; /* Remove default background */
+    border: none; /* Remove default border */
+    box-shadow: none; /* Remove default shadow */
+}
+
+/* Custom Plus/Minus icon */
+.accordion-button::before {
+    content: '\002B'; /* Plus sign */
+    font-size: 1.5rem;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.accordion-button.collapsed::before {
+    content: '\002B'; /* Plus sign when collapsed */
+}
+
+.accordion-button:not(.collapsed)::before {
+    content: '\00D7'; /* Cross sign when expanded */
+}
+
+/* Remove right-side arrow */
+.accordion-button::after {
+    content: none; /* Remove default arrow */
+}
+
+.accordion-body {
+    font-size: 0.9rem;
+    padding: 20px;
+    color: #555;
+}
+
+/* Style the accordion items to only show bottom border */
+.accordion-item {
+    border: none; /* Remove all borders from accordion items */
+    border-bottom: 2px solid #ddd; /* Add bottom border */
+    padding: 5px 10px;
+}
+
+/* Media query for large screens (1200px and above) */
+@media (min-width: 1200px) {
+    .faq-heading {
+        font-size: 3.5rem; /* Slightly larger font size for large screens */
+    }
+
+    .accordion-button {
+        font-size: 1rem; /* Slightly larger font size for better readability */
+    }
+
+    .accordion-body {
+        font-size: 1rem; /* Larger text for better readability */
+    }
+}
+
+/* Media query for medium screens (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .faq-heading {
+        font-size: 2.8rem; /* Smaller font size for medium screens */
+    }
+
+    .accordion-button {
+        font-size: 1rem; /* Adjusted font size for medium screens */
+    }
+
+    .accordion-body {
+        font-size: 1rem; /* Adjusted font size for medium screens */
+    }
+}
+
+/* Media query for small screens (up to 767px) */
+@media (max-width: 767px) {
+    .faq-heading {
+        font-size: 2.5rem; /* Smaller font size for mobile screens */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .accordion-button {
+        font-size: 0.85rem; /* Smaller font size for mobile */
+        padding-left: 25px; /* Reduce padding for mobile */
+    }
+
+    .accordion-button::before {
+        font-size: 1.2rem; /* Smaller icon for mobile */
+        left: 10px; /* Adjust position for mobile */
+    }
+
+    .accordion-body {
+        font-size: 0.85rem; /* Smaller text for mobile */
+        padding: 15px; /* Adjust padding for mobile */
+    }
+
+    .accordion-item {
+        padding: 5px 8px; /* Reduced padding for mobile */
+    }
+}
+
+
+
+
+
+
+
+/* STEPS */
+.newsletter-section {
+    padding: 50px 0;
+    background-color: #0D048C;
+    border-radius: 30px;
+    text-align: center; /* Center align content */
+}
+
+.newsletter-img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 30px; /* Add margin for spacing */
+}
+
+.newsletter-heading {
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.newsletter-para {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.newsletter-input {
+    max-width: 400px;
+    margin: 0 auto; /* Center the input field */
+}
+
+.form-control {
+    padding: 15px 20px;
+    border-radius: 20px 0 0 20px; /* Rounded corners on the left side only */
+}
+
+.input-group #c {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    border-radius: 0; /* Keep the button rectangular */
+    background-color: #0D048C;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group .form-control {
+    border-radius: 20px;
+    padding-right: 120px; /* Space for button */
+    padding: 30px 0px;
+}
+
+/* Responsive Design */
+
+/* Large screens (1200px and above) */
+@media (min-width: 1200px) {
+    .newsletter-heading {
+        font-size: 3rem;
+    }
+
+    .newsletter-para {
+        font-size: 1.2rem;
+    }
+
+    .newsletter-input {
+        max-width: 500px; /* Increase max-width for larger screens */
+    }
+}
+
+/* Medium screens (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .newsletter-heading {
+        font-size: 2.5rem; /* Adjust font size for medium screens */
+    }
+
+    .newsletter-para {
+        font-size: 1.1rem;
+    }
+
+    .newsletter-input {
+        max-width: 450px; /* Adjust width for medium screens */
+    }
+}
+
+/* Small screens (up to 767px) */
+@media (max-width: 767px) {
+    .newsletter-section {
+        padding: 30px 0; /* Reduce padding for smaller screens */
+    }
+
+    .newsletter-heading {
+        font-size: 1.8rem; /* Smaller font size for mobile */
+    }
+
+    .newsletter-para {
+        font-size: 0.9rem; /* Smaller paragraph size for mobile */
+    }
+
+    .newsletter-input {
+        max-width: 90%; /* Take up more width on small screens */
+    }
+
+    .form-control {
+        padding: 12px 15px; /* Adjust padding for mobile */
+    }
+
+    .input-group .form-control {
+        padding-right: 90px; /* Adjust space for button on smaller screens */
+    }
+
+    .input-group #c {
+        padding: 8px 15px; /* Smaller button size for mobile */
+    }
+}
+
+    
+
+
+/* FOOTER   */
+/* Customizing footer */
+footer {
+  background-color: #000000;
+  color: white;
+  border-top: 1px solid #444;
+  font-size: 0.8rem;
+  padding: 20px 0;
+}
+
+footer h5 {
+  font-size: 1.2rem;
+}
+
+footer p {
+  font-size: 0.9rem;
+}
+
+footer a {
+  text-decoration: none;
+  border: none;
+}
+
+footer a:hover {
+  color: #ffc107;
+  text-decoration: none;
+}
+
+footer .list-unstyled {
+  padding-left: 0;
+}
+
+footer .fab {
+  font-size: 1.5rem;
+}
+
+footer .fab:hover {
+  color: #ffc107;
+}
+
+footer .col-lg-3, footer .col-md-6 {
+  border-right: 1px solid #444;
+}
+
+footer .col-lg-3:last-child, footer .col-md-6:last-child {
+  border-right: none;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+footer ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* Style for social media icons */
+.social-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #444;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.footer-bottom {
+  padding-top: 15px;
+  font-size: 0.8rem;
+}
+
+.footer-bottom a:hover {
+  color: #ffc107;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 767px) {
+  footer .row {
+    text-align: center;
+  }
+
+  footer .col-lg-3, footer .col-md-6 {
+    border-right: none;
+  }
+
+  footer .col-md-6, footer .col-lg-3 {
+    padding-left: 0;
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  footer .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .social-icon {
+    font-size: 1.2rem;
+    width: 35px;
+    height: 35px;
+  }
+
+  .footer-bottom {
+    font-size: 0.75rem;
+  }
+}
+
+/* Medium screens (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  footer .row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  footer .col-lg-3, footer .col-md-6 {
+    width: 48%; /* Adjust width for medium screens */
+    border-right: 1px solid #444;
+  }
+
+  footer .col-md-6:last-child, footer .col-lg-3:last-child {
+    border-right: none;
+  }
+
+  .social-icon {
+    font-size: 1.4rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer-bottom {
+    font-size: 0.9rem;
+  }
+}
+
+/* Large screens (1200px and above) */
+@media (min-width: 1200px) {
+  footer .row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  footer .col-lg-3, footer .col-md-6 {
+    width: 23%; /* Adjust width for larger screens */
+    border-right: 1px solid #444;
+  }
+
+  footer .col-lg-3:last-child, footer .col-md-6:last-child {
+    border-right: none;
+  }
+
+  .social-icon {
+    font-size: 1.6rem;
+    width: 45px;
+    height: 45px;
+  }
+
+  .footer-bottom {
+    font-size: 1rem;
+  }
+}

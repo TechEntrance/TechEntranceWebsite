@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Application Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f4f7fc;
+            padding: 40px 0;
+        }
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        .form-title {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            color: #4b6cb7;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            font-weight: 500;
+            color: #444;
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        .form-control:focus {
+            border-color: #4b6cb7;
+            box-shadow: 0 0 5px rgba(75, 108, 183, 0.6);
+        }
+        .btn-submit {
+            background-color: #4b6cb7;
+            color: white;
+            border-radius: 10px;
+            padding: 14px;
+            border: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #375a9b;
+        }
+        .form-check-label {
+            font-weight: 500;
+            color: #444;
+        }
+        .form-check-input {
+            margin-right: 10px;
+        }
+        .file-upload-container {
+            position: relative;
+        }
+        .file-upload-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+            color: #444;
+            font-weight: 500;
+        }
+        .file-upload-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-upload-container:hover .file-upload-input {
+            border-color: #4b6cb7;
+        }
+        .form-section-title {
+            font-size: 20px;
+            color: #4b6cb7;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .form-container h4 {
+            margin-bottom: 15px;
+        }
+        .back-btn {
+            background-color: #e0e0e0;
+            color: #444;
+            border-radius: 10px;
+            padding: 12px 20px;
+            border: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #d6d6d6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="form-container">
+                <h2 class="form-title">Internship Application Form</h2>
+                <form>
+                    <!-- PERSONAL INFO -->
+                    <h4 class="form-section-title">Personal Info</h4>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+                    </div>
+
+                    <!-- EDUCATIONAL INFO -->
+                    <h4 class="form-section-title">Educational Info</h4>
+                    <div class="form-group">
+                        <label for="university">University/College Name</label>
+                        <input type="text" class="form-control" id="university" placeholder="Enter your university/college name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="degreeProgram">Degree Program</label>
+                        <input type="text" class="form-control" id="degreeProgram" placeholder="Enter your degree program" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="number" class="form-control" id="year" placeholder="Enter your current year of study" required>
+                    </div>
+
+                    <!-- INTERNSHIP DETAILS -->
+                    <h4 class="form-section-title">Internship Details</h4>
+                    <div class="form-group">
+                        <label for="position">Internship Position Applied For</label>
+                        <select class="form-control" id="position">
+                            <option>Software Developer</option>
+                            <option>Marketing Intern</option>
+                            <option>Graphic Designer</option>
+                            <option>Data Analyst</option>
+                            <option>Product Manager</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Preferred Start Date</label>
+                        <input type="date" class="form-control" id="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration of Internship</label>
+                        <select class="form-control" id="duration">
+                            <option>1 month</option>
+                            <option>3 months</option>
+                            <option>6 months</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Availability</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="availability" id="fullTime" value="Full-time" required>
+                            <label class="form-check-label" for="fullTime">Full-time</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="availability" id="partTime" value="Part-time" required>
+                            <label class="form-check-label" for="partTime">Part-time</label>
+                        </div>
+                    </div>
+
+                    <!-- Custom File Upload -->
+                    <div class="form-group file-upload-container">
+                        <label for="resume">Upload Resume</label>
+                        <input type="text" class="form-control file-upload-input" readonly placeholder="Choose your resume file" id="resumeText">
+                        <input type="file" class="file-upload-btn" id="resume" accept=".pdf,.doc,.docx" onchange="updateFileName()">
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">Submit Application</button>
+                    
+                    <!-- Back Button -->
+                    <button type="button" class="back-btn" onclick="window.history.back()">Back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Update the text of the file input when a file is selected
+    function updateFileName() {
+        var fileInput = document.getElementById('resume');
+        var fileName = fileInput.files[0] ? fileInput.files[0].name : 'Choose your resume file';
+        document.getElementById('resumeText').value = fileName;
+    }
+</script>
+
+</body>
+</html>
