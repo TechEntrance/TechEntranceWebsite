@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - TechEntrance</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    
+    <style>
+        body {
+            background-color: #f4f7fc;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-title {
+            text-align: center;
+            color: #4b6cb7;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .form-control {
+            padding: 12px;
+            border-radius: 10px;
+        }
+        .btn-login {
+            background-color: #4b6cb7;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            font-weight: bold;
+        }
+        .btn-login:hover {
+            background-color: #3b5998;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2 class="login-title">Admin Login</h2>
+    <form id="loginForm" onsubmit="login(event)">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-login">Login</button>
+    </form>
+</div>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/admin-auth.js"></script>
+<script>
+// Check if already logged in
+async function checkAuth() {
+    try {
+        const user = await checkAuthState();
+        if (user && adminEmails.includes(user.email)) {
+            window.location.href = 'check_applications.html';
+        }
+    } catch (error) {
+        console.error('Auth check error:', error);
+    }
+}
+
+checkAuth();
+
+async function login(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    
+    try {
+        submitBtn.disabled = true;
+        
+        // First, check if email is in admin list
+        if (!adminEmails.includes(email)) {
+            throw new Error('This email is not authorized for admin access.');
+        }
+        
+        // Try to sign in
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+        
+        if (userCredential.user) {
+            window.location.href = 'check_applications.html';
+        }
+    } catch (error) {
+        let errorMessage = '';
+        
+        if (error.message === 'This email is not authorized for admin access.') {
+            errorMessage = error.message;
+        } else if (error.code === 'auth/invalid-credential' || error.code === 'auth/invalid-login-credentials') {
+            errorMessage = 'Invalid email or password. Please try again.';
+        } else {
+            switch (error.code) {
+                case 'auth/user-not-found':
+                    errorMessage = 'No user found with this email address.';
+                    break;
+                case 'auth/wrong-password':
+                    errorMessage = 'Invalid password. Please try again.';
+                    break;
+                case 'auth/invalid-email':
+                    errorMessage = 'Invalid email address format.';
+                    break;
+                case 'auth/too-many-requests':
+                    errorMessage = 'Too many failed attempts. Please try again later.';
+                    break;
+                default:
+                    errorMessage = 'Login failed. Please try again.';
+                    console.error('Login error:', error);
+            }
+        }
+        
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: errorMessage,
+            confirmButtonColor: '#4b6cb7'
+        });
+    } finally {
+        submitBtn.disabled = false;
+    }
+}
+</script>
+
+</body>
+</html> 
