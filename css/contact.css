@@ -21,6 +21,9 @@ body {
       color: white;
       cursor: pointer;
     }
+    .newsletter-input input::placeholder {
+      padding-left: 10px;
+    }
 
     .menu-button {
       display: block;

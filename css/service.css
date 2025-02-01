@@ -14,7 +14,9 @@ body {
       width: 150px;
       height: 70px;
     }
-
+    .newsletter-input input::placeholder {
+      padding-left: 10px;
+    }
     .menu-name {
       display: none;
       font-weight: bold;

@@ -19,7 +19,7 @@
                     if (title === 'HAPPY CLIENTS' || title === 'TECHNOLOGISTS') {
                         numberElement.textContent = count + '+';
                     } else if (title === 'COMPLETED PROJECTS') {
-                        numberElement.textContent = (count / 1000).toFixed(1) + 'K'; // Adding K for 'Clients'
+                        numberElement.textContent = toFixed(1) ; // Adding K for 'Clients'
                     } else {
                         numberElement.textContent = target; // For other counters, just set the target value
                     }

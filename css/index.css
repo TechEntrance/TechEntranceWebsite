@@ -74,7 +74,10 @@ body {
       color: #0d048c;
       text-decoration: none;
     }
-
+    .newsletter-input input::placeholder {
+      padding-left: 10px;
+    }
+    
     /* Apply Internship Button */
     #a1 {
       position: relative;
