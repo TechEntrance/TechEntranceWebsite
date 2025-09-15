@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login and Signup</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        width: 320px;
+        text-align: center;
+        animation: popUp 0.3s ease;
+    }
+    @keyframes popUp {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    .container.hidden-container {
+        display: none;
+    }
+    .container h2 {
+        margin-bottom: 30px;
+        color: #333;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #666;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    .form-group button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #00E6B2;
+        color: #fff;
+        cursor: pointer;
+    }
+    .form-group button:hover {
+        background-color: #00cc99;
+    }
+    .switch-btn {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #666;
+    }
+    .switch-btn a {
+        color: #00E6B2;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container" id="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+        <div class="form-group">
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" name="login-username" required>
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="login-password" required>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="login()">Login</button>
+        </div>
+        <div class="switch-btn">
+            Don't have an account? <a href="#" onclick="showSignupForm()">Signup</a>
+        </div>
+    </form>
+</div>
+
+<div class="container hidden-container" id="signup-container">
+    <h2>Signup</h2>
+    <form id="signup-form">
+        <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="signup-email" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-username">Username</label>
+            <input type="text" id="signup-username" name="signup-username" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="signup-password" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-phone">Phone Number</label>
+            <input type="tel" id="signup-phone" name="signup-phone" required>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="signup()">Signup</button>
+        </div>
+        <div class="switch-btn">
+            Already have an account? <a href="#" onclick="showLoginForm()">Login</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    function showSignupForm() {
+        document.getElementById("login-container").classList.add("hidden-container");
+        document.getElementById("signup-container").classList.remove("hidden-container");
+    }
+
+    function showLoginForm() {
+        document.getElementById("signup-container").classList.add("hidden-container");
+        document.getElementById("login-container").classList.remove("hidden-container");
+    }
+
+    function login() {
+        var username = document.getElementById("login-username").value;
+        var password = document.getElementById("login-password").value;
+        
+        // Call server-side function for login
+        google.script.run.withSuccessHandler(function(found) {
+            if (found == 'TRUE') {
+                alert('Login successful');
+                // Redirect or perform any action upon successful login
+            } else {
+                alert('Invalid username or password');
+            }
+        }).checkLogin(username, password);
+    }
+
+    function signup() {
+        var email = document.getElementById("signup-email").value;
+        var username = document.getElementById("signup-username").value;
+        var password = document.getElementById("signup-password").value;
+        var phone = document.getElementById("signup-phone").value;
+
+        // Call server-side function for signup
+        google.script.run.withSuccessHandler(function() {
+            alert('Signup successful');
+            // Redirect or perform any action upon successful signup
+            // Clear form fields
+            document.getElementById("signup-email").value = '';
+            document.getElementById("signup-username").value = '';
+            document.getElementById("signup-password").value = '';
+            document.getElementById("signup-phone").value = '';
+        }).AddRecord(username, password, email, phone);
+    }
+</script>
+
+</body>
+</html>

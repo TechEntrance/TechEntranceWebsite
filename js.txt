@@ -1,0 +1,75 @@
+// 1. Set this to match your Google Sheet's ID
+const SHEET_ID = 'YOUR_SHEET_ID';
+const SHEET_NAME = 'Sheet1'; // Change if your sheet has a different name
+
+// 2. Run this function once to set up the web app
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({ status: 'success', message: 'Form submission endpoint is active' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// 3. Handle form submissions
+function doPost(e) {
+  try {
+    // Parse the form data
+    const jsonData = JSON.parse(e.postData.contents);
+    
+    // Open the spreadsheet
+    const ss = SpreadsheetApp.openById(SHEET_ID);
+    const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+    
+    // Add headers if the sheet is empty
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone', 'Company', 'Service', 'Message']);
+    }
+    
+    // Add form data to the sheet
+    sheet.appendRow([
+      new Date(jsonData.timestamp),
+      jsonData.name,
+      jsonData.email,
+      jsonData.phone,
+      jsonData.company || '',
+      jsonData.service,
+      jsonData.message
+    ]);
+    
+    // Send success response
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'success',
+      message: 'Form submitted successfully'
+    })).setMimeType(ContentService.MimeType.JSON);
+    
+  } catch (error) {
+    // Send error response
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// 4. Helper function to get the last row with data
+function getLastRow(sheet) {
+  const lastRow = sheet.getLastRow();
+  return lastRow > 0 ? lastRow : 1;
+}
+
+
+
+####
+Deploy the Web App:
+Click on the "Deploy" button in the top right
+Select "New deployment"
+Choose "Web app" as the deployment type
+Set "Execute as" to "Me"
+Set "Who has access" to "Anyone"
+Click "Deploy"
+Copy the web app URL (you'll need this in the next step)
+Update the client.html file:
+Replace YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL in client.html with the web app URL you just copied
+Make sure the URL ends with /exec (not /dev)
+Test the Form:
+Open client.html in your browser
+Fill out the form and submit it
+Check your Google Sheet - you should see the form data appear in a new row
