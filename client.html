@@ -115,33 +115,50 @@
   </div>
 
   <script>
-    document.getElementById('client-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Show loading state
-      const btn = this.querySelector('button[type="submit"]');
-      const btnText = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting...';
-      
-      // Simulate form submission (replace with actual submission)
-      setTimeout(() => {
-        // Reset form
-        this.reset();
-        
-        // Show success message
-        document.getElementById('success-message').style.display = 'block';
-        
-        // Reset button
-        btn.disabled = false;
-        btn.innerHTML = btnText;
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-          document.getElementById('success-message').style.display = 'none';
-        }, 5000);
-      }, 1500);
+   document.getElementById('client-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const btn = this.querySelector('button[type="submit"]');
+  const btnText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting...';
+  
+  const formData = {
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    company: document.getElementById('company').value.trim(),
+    service: document.getElementById('service').value,
+    message: document.getElementById('message').value.trim()
+  };
+
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzcR6Mnav_2YmTFV5hDPNpslmxQrpnkjSq_kw4Sa_pwgsCl-jeutw-ks4aCdmSaEkgW/exec', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
     });
+    
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      this.reset();
+      document.getElementById('success-message').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('success-message').style.display = 'none';
+      }, 5000);
+    } else {
+      throw new Error(result.message || 'Failed to submit form');
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = btnText;
+  }
+});
   </script>
 </body>
 </html>
